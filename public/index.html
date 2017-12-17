@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.11.0/css/bootstrap-tour.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+        <!-- App styles -->
+        <link rel="stylesheet" href="styles.css">
+        <!-- noUiSlider -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.css">
+
+    </head>
+    <body>
+        <div class="container-fluid">
+
+            <div class="row">
+                <svg id="taxatree" width="100%" height="112"></svg>
+            </div>
+
+            <hr/>
+
+            <div class="row">
+
+                <div class="col-md-2" id="detail_ctrls">
+
+                    <div id="tour">
+
+                        <a href="#" class="btn btn-info btn-xs" id="tourBtn">
+                            <span class="glyphicon glyphicon-info-sign"></span>
+                            Start Tour
+                        </a>
+                    </div>
+
+                    <h4> Detail View Controls </h4> <hr/>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> X Axis: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="xaxis"
+                                    data-width="100%"
+                                    onchange="select_xaxis_onchange()"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Y Axis: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="yaxis"
+                                    data-width="100%"
+                                    onchange="select_yaxis_onchange()"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Switch Axes: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-sm btn-block btn-default" id="swaxes">
+                                X <span class="glyphicon glyphicon-resize-horizontal"></span> Y
+                            </a>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> KDE Kernel: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="kde_kname"
+                                    data-width="100%"
+                                    onchange="kde_kname_onchange()"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> KDE Scale: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="kde_kscale" type="range"
+                                    onclick="kde_kscale_onchange()"></input>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> GP Kernel: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="gp_kname"
+                                    data-width="100%"
+                                    onchange="gp_kname_onchange()"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> GP Scale: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="gp_kscale" type="range"
+                                    onclick="gp_kscale_onchange()"></input>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> GP Period: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker"
+                                    id="gp_kperiod"
+                                    data-width="100%">
+                                <option value='none'>None</option>
+                                <option value='1'>1 Month</option>
+                                <option value='3'>3 Months</option>
+                                <option value='6'>6 Months</option>
+                                <option value='12'>1 Year</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <hr/>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Axes-Origin: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="origin" type="checkbox"
+                                    onclick="checkbox_axis_onchange()"></input>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Linked-Views: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="linked" type="checkbox"
+                                    onclick="checkbox_link_onchange()"></input>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Views-Average: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="davg" type="checkbox"
+                                    onclick="checkbox_davg_onchange()"></input>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div id="map"></div>
+                </div>
+
+                <div class="col-md-3" id="spatiotemporal_ctrls">
+
+                    <h4> Spatiotemporal View Controls & Info </h4> <hr/>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Region: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="region"
+                                    data-width="100%"
+                                    onchange="select_region_onchange()">
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-md-6">
+                            <span class="fright"> P. Status: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="selectpicker" id="pstatus"
+                                    data-width="100%"
+                                    onchange="select_pstatus_onchange()">
+                                <option value="both">Both</option>
+                                <option value="prot">Protected</option>
+                                <option value="nprot">Not Protected</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Taxa Filter: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="filter taxa"></span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Num. Samples: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="filter nsamples"></span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <span class="fright"> Num. Creatures: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="filter nfish"></span>
+                        </div>
+
+                    </div>
+
+                    <hr/>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4> Detail View Hover Info </h4> <hr/>
+                            <div id="davg_info"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-1">
+
+                    <div class="row">
+                        Date Slider:
+                    </div>
+
+                    <div class="row">
+                        <div id="date-range"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr/>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div id="filters" style="border: 1px"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- D3 + extensions -->
+        <script src="//d3js.org/d3.v4.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3-request/1.0.6/d3-request.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3-dispatch/1.0.3/d3-dispatch.min.js"></script>
+        <script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+        <!-- linear algebra -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/vectorious/4.8.1/vectorious.min.js"></script>
+
+        <!-- Core classes -->
+        <script src="api.js"></script>
+        <script src="taxonomy.js"></script>
+
+        <!-- noUiSlider -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/10.1.0/nouislider.min.js"></script>
+        <!-- Date range slider -->
+        <script src="date-range.js"></script>
+
+        <!-- Dispatch and custom events -->
+        <script src="dispatch.js"></script>
+
+        <!-- LA and ML -->
+        <script src="kde.js"></script>
+        <script src="gp.js"></script>
+
+        <!-- Filter Manager -->
+        <script src="filtermanager.js"></script>
+
+        <!-- Time function call util -->
+        <script src="timewarp.js"></script>
+
+        <!-- Taxonomy View -->
+        <script src="taxatree3.js"></script>
+        <script src="taxa.js"></script>
+
+        <!-- <script src="taxatree_sel.js"></script> -->
+        <!-- <script src="taxatree.js"></script> -->
+        <!-- <script src="taxatree2.js"></script> -->
+
+        <!-- Geographic View -->
+        <!-- <script src="geo.js"></script> -->
+        <!-- <script src="geo2.js"></script> -->
+        <!-- <script src="geo3.js"></script> -->
+        <script src="geo_sel.js"></script>
+        <!-- <script src="geo_sel_markers.js"></script> -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkGbl_mDzoSqtyJI2FFRdc8erJoTtF99M&libraries=drawing&callback=initMap"></script>
+
+        <!-- <script src="geo_heatmap.js"></script> -->
+        <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkGbl_mDzoSqtyJI2FFRdc8erJoTtF99M&libraries=visualization&callback=initMap"></script> -->
+
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tour/0.11.0/js/bootstrap-tour.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+        <script src="tour.js"></script>
+    </body>
+</html>

@@ -1,0 +1,2 @@
+@default_files = ('slides');
+$pdf_mode = 1;

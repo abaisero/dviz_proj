@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+
+cat samples_split_* > samples.csv
+
+exit 0

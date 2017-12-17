@@ -16,19 +16,13 @@ To install the node dependencies, run
 
 `> npm install`
 
-To create the database, run
-
-`> node schema [--species] [--samples]`
-    - `--species`: creates/re-creates the `species` table
-    - `--samples`: creates/re-creates the `samples` table
-
 Before moving on, you have to make sure to join together all the data-files,
 which have been split to satisfy github's maximum file size.  Temporarily move
 into the data folder, and run
 
 `> ./join`
 
-To fill the database, go back to the main folder, and run
+To create and fill the database, go back to the main folder, and run
 
 `> node import_data [--species] [--samples] [--aggregate] [--port <port>]`
     - `--species`: imports species data
